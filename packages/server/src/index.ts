@@ -1,12 +1,12 @@
-import express from "express";
-import cors from "cors";
-import routes from "./routes";
+import express from 'express'
+import cors from 'cors'
+import routes from './routes'
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(routes);
+app.use(cors())
+app.use(routes)
 
 app.listen(333, () => {
-  console.log("Server running");
-});
+  console.log('Server running')
+})

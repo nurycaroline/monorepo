@@ -9,5 +9,9 @@
     ]
   },
   "author": "Nurielly Caroline Brizola <nurycaroline@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.0.2",
+    "@monorepo/eslint-config": "*"
+  }
 }
