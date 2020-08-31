@@ -1,13 +1,27 @@
-import express from "express";
+import express from 'express'
 
-const routes = express.Router();
+import { IUser, ICar } from '@monorepo/interfaces'
 
-routes.get("/", (request, response) => {
-  return response.json({ message: "Hello World" });
-});
+const routes = express.Router()
 
-routes.post("/posts", (request, response) => {
-  return response.json({ message: "New post" });
-});
+routes.get('/', (request, response) => {
+  return response.json({ message: 'Hello World' })
+})
 
-export default routes;
+routes.get('/user/1', (request, response) => {
+  const newUser: IUser = { name: '', age: null, phone: '' }
+
+  newUser.name = 'Nurielly'
+  newUser.age = 18
+  newUser.phone = '9999999'
+
+  return response.json(newUser)
+})
+
+routes.get('/car/1', (request, response) => {
+  const newCar: ICar = { model: 'audi', year: 2019, name: 'bla' }
+
+  return response.json(newCar)
+})
+
+export default routes

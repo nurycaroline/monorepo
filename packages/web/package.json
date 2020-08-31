@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "@monorepo/axios-config": "*"
+    "@monorepo/axios-config": "*",
+    "@monorepo/interfaces": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",

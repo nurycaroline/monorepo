@@ -1,16 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import api from '@monorepo/axios-config'
-
-// import { Container } from './styles';
+import { IUser, ICar } from '@monorepo/interfaces'
 
 const App: React.FC = () => {
+  const [user, setUser] = useState<IUser>()
+  const [car, setCar] = useState<ICar>()
+
   useEffect(() => {
-    api.get('/').then(response => {
-      console.log(response)
-    })
+    const loadUser = async () => {
+      await api.get('/user/1').then(response => {
+        setUser(response.data)
+      })
+    }
+
+    const loadCar = async () => {
+      await api.get('/car/1').then(response => {
+        setCar(response.data)
+      })
+    }
+
+    loadUser()
+    loadCar()
   }, [])
 
-  return <h1>Hello World</h1>
+  return (
+    <h1>
+      Hello World, {user.name} - {car.name}
+    </h1>
+  )
 }
 
 export default App
