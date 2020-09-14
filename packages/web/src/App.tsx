@@ -1,32 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import api from '@monorepo/axios-config'
-import { IUser, ICar } from '@monorepo/interfaces'
+import React, { useCallback } from 'react'
+import api, { useFetch } from '@monorepo/api-rest'
+import { IRepo } from '@monorepo/interfaces'
+import { mutate as mutateGlobal } from 'swr'
+
+interface FecthProps {
+  data: IRepo[]
+  mutate?: any
+}
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<IUser>()
-  const [car, setCar] = useState<ICar>()
+  const { data, mutate, isValidating } = useFetch<FecthProps>(
+    'users/nurycaroline/repos'
+  )
 
-  useEffect(() => {
-    const loadUser = async () => {
-      await api.get('/user/1').then(response => {
-        setUser(response.data)
+  const handleNameChange = useCallback(
+    (id: number) => {
+      console.log(id)
+
+      api.put(`users/nurycaroline/repos/${id}`, { name: 'Bartolomeu' })
+      const updatedUsers = data?.map(repo => {
+        if (repo.id === id) {
+          return { ...repo, name: 'Bartolomeu' }
+        }
+        return repo
       })
-    }
+      mutate(updatedUsers, false)
+      mutateGlobal(`users/nurycaroline/repos/${id}`)
+    },
+    [data, mutate]
+  )
 
-    const loadCar = async () => {
-      await api.get('/car/1').then(response => {
-        setCar(response.data)
-      })
-    }
-
-    loadUser()
-    loadCar()
-  }, [])
+  if (!data) {
+    return <p>Carregando...</p>
+  }
 
   return (
-    <h1>
-      Hello World, {user.name} - {car.name}
-    </h1>
+    <div>
+      <h1>Listagem dos Repositorios</h1>
+
+      <ul>
+        {data.length > 0 &&
+          data.map(repo => (
+            <li key={repo.id}>
+              <h2>{repo.name}</h2>
+              <p>{repo.description}</p>
+
+              <button type="button" onClick={() => handleNameChange(repo.id)}>
+                Alterar Nome
+              </button>
+            </li>
+          ))}
+      </ul>
+    </div>
   )
 }
 

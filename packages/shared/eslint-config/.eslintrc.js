@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'standard',
     'plugin:@typescript-eslint/recommended',
+    "prettier",
     'prettier/@typescript-eslint',
     'prettier/standard',
     'prettier/react'

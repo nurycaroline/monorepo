@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - "packages/web/**"
-      - 'packages/shared/axios-config/**'
+      - 'packages/shared/api-rest/**'
 
 jobs:
   deploy:

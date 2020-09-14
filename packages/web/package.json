@@ -7,10 +7,12 @@
     "start": "webpack-dev-server --mode development"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@monorepo/api-rest": "*",
+    "@monorepo/interfaces": "*",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "@monorepo/axios-config": "*",
-    "@monorepo/interfaces": "*"
+    "swr": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",

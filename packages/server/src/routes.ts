@@ -1,27 +1,49 @@
 import express from 'express'
 
-import { IUser, ICar } from '@monorepo/interfaces'
+import { IRepo } from '@monorepo/interfaces'
 
 const routes = express.Router()
 
-routes.get('/', (request, response) => {
+let repos: IRepo[] = [
+  {
+    id: 1,
+    name: 'AAA',
+    description: 'aaa'
+  },
+  {
+    id: 2,
+    name: 'BBB',
+    description: 'bbb'
+  },
+  {
+    id: 3,
+    name: 'CCC',
+    description: 'ccc'
+  }
+]
+
+routes.get('/', (_, response) => {
   return response.json({ message: 'Hello World' })
 })
 
-routes.get('/user/1', (request, response) => {
-  const newUser: IUser = { name: '', age: null, phone: '' }
-
-  newUser.name = 'Nurielly'
-  newUser.age = 18
-  newUser.phone = '9999999'
-
-  return response.json(newUser)
+routes.get('/users/:username/repos', (_, response) => {
+  return response.send(repos)
 })
 
-routes.get('/car/1', (request, response) => {
-  const newCar: ICar = { model: 'audi', year: 2019, name: 'bla' }
+routes.put('/users/:username/repos/:id', (request, response) => {
+  const { id } = request.params
 
-  return response.json(newCar)
+  const newRepos = repos.map(repo => {
+    if (repo.id === parseInt(id)) {
+      return { ...repo, name: 'Bartolomeu' }
+    }
+
+    return repo
+  })
+
+  repos = newRepos
+
+  return response.json(newRepos)
 })
 
 export default routes
