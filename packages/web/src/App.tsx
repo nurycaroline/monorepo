@@ -6,8 +6,8 @@ import { mutate as mutateGlobal } from 'swr'
 import api, { useFetch } from '@monorepo/api-rest'
 import { IRepo } from '@monorepo/interfaces'
 
-import Input from './components/input'
-import Select from './components/select'
+import Input from '@components/input'
+import Select from '@components/select'
 
 const App: React.FC = () => {
   const { data, mutate } = useFetch<IRepo[]>('users/nurycaroline/repos')
