@@ -30,6 +30,16 @@ routes.get('/users/:username/repos', (_, response) => {
   return response.send(repos)
 })
 
+routes.post('/users/:username/repos', (request, response) => {
+  const { name, description } = request.body
+
+  const newRepo = { id: repos.length + 2, name, description }
+
+  repos.push(newRepo)
+
+  return response.json(newRepo)
+})
+
 routes.put('/users/:username/repos/:id', (request, response) => {
   const { id } = request.params
 

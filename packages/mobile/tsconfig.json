@@ -1,10 +1,31 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": ["esnext", "dom"],   
-    "allowJs": false,          
-    "checkJs": false,         
-    "jsx": "react-native"
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "allowJs": false,
+    "checkJs": false,
+    "jsx": "react-native",
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@routes/*": [
+        "routes/*"
+      ]
+    },
   },
   "include": [
     "./src/**/*"
